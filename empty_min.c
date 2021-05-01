@@ -51,6 +51,7 @@
 // #include <ti/drivers/Watchdog.h>
 // #include <ti/drivers/WiFi.h>
 
+#include "drivers/motorlib.h"
 /* Board Header file */
 #include "Board.h"
 
