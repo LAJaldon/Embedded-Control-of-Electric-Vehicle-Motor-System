@@ -12,8 +12,14 @@ GEN_CMDS__FLAG := -l"configPkg/linker.cmd"
 ORDERED_OBJS += \
 "./EK_TM4C1294XL.obj" \
 "./empty_min.obj" \
+"./images.obj" \
+"./UI/UI.obj" \
 "./drivers/Kentec320x240x16_ssd2119_spi.obj" \
+"./drivers/frame.obj" \
+"./drivers/pinout.obj" \
 "./drivers/touch.obj" \
+"./motor/motor.obj" \
+"./sensor/sensor.obj" \
 "../EK_TM4C1294XL.cmd" \
 "../drivers/MotorLib.lib" \
 $(GEN_CMDS__FLAG) \
@@ -32,9 +38,15 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
+-include UI/subdir_vars.mk
 -include drivers/subdir_vars.mk
+-include motor/subdir_vars.mk
+-include sensor/subdir_vars.mk
 -include subdir_rules.mk
+-include UI/subdir_rules.mk
 -include drivers/subdir_rules.mk
+-include motor/subdir_rules.mk
+-include sensor/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -165,8 +177,8 @@ Assignment.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "EK_TM4C1294XL.obj" "empty_min.obj" "drivers\Kentec320x240x16_ssd2119_spi.obj" "drivers\touch.obj" 
-	-$(RM) "EK_TM4C1294XL.d" "empty_min.d" "drivers\Kentec320x240x16_ssd2119_spi.d" "drivers\touch.d" 
+	-$(RM) "EK_TM4C1294XL.obj" "empty_min.obj" "images.obj" "UI\UI.obj" "drivers\Kentec320x240x16_ssd2119_spi.obj" "drivers\frame.obj" "drivers\pinout.obj" "drivers\touch.obj" "motor\motor.obj" "sensor\sensor.obj" 
+	-$(RM) "EK_TM4C1294XL.d" "empty_min.d" "images.d" "UI\UI.d" "drivers\Kentec320x240x16_ssd2119_spi.d" "drivers\frame.d" "drivers\pinout.d" "drivers\touch.d" "motor\motor.d" "sensor\sensor.d" 
 	-$(RMDIR) $(GEN_MISC_DIRS__QUOTED)
 	-@echo 'Finished clean'
 	-@echo ' '

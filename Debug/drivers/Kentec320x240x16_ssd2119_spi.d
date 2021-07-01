@@ -24,6 +24,7 @@ drivers/Kentec320x240x16_ssd2119_spi.obj: C:/ti/tivaware_c_series_2_1_4_178/driv
 drivers/Kentec320x240x16_ssd2119_spi.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/rom.h
 drivers/Kentec320x240x16_ssd2119_spi.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/pin_map.h
 drivers/Kentec320x240x16_ssd2119_spi.obj: C:/ti/tivaware_c_series_2_1_4_178/grlib/grlib.h
+drivers/Kentec320x240x16_ssd2119_spi.obj: C:/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c1294xl-boostxl-kentec-s1/drivers/Kentec320x240x16_ssd2119_spi.h
 
 C:/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c1294xl-boostxl-kentec-s1/drivers/Kentec320x240x16_ssd2119_spi.c: 
 C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdint.h: 
@@ -49,3 +50,4 @@ C:/ti/tivaware_c_series_2_1_4_178/driverlib/timer.h:
 C:/ti/tivaware_c_series_2_1_4_178/driverlib/rom.h: 
 C:/ti/tivaware_c_series_2_1_4_178/driverlib/pin_map.h: 
 C:/ti/tivaware_c_series_2_1_4_178/grlib/grlib.h: 
+C:/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c1294xl-boostxl-kentec-s1/drivers/Kentec320x240x16_ssd2119_spi.h: 

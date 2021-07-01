@@ -1,6 +1,6 @@
 # FIXED
 
-drivers/touch.obj: C:/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c1294xl-boostxl-kentec-s1/drivers/touch.c
+drivers/touch.obj: ../drivers/touch.c
 drivers/touch.obj: C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdbool.h
 drivers/touch.obj: C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/_ti_config.h
 drivers/touch.obj: C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/linkage.h
@@ -27,7 +27,7 @@ drivers/touch.obj: C:/ti/tivaware_c_series_2_1_4_178/grlib/grlib.h
 drivers/touch.obj: C:/ti/tivaware_c_series_2_1_4_178/grlib/widget.h
 drivers/touch.obj: C:/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c1294xl-boostxl-kentec-s1/drivers/touch.h
 
-C:/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c1294xl-boostxl-kentec-s1/drivers/touch.c: 
+../drivers/touch.c: 
 C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdbool.h: 
 C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/_ti_config.h: 
 C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/linkage.h: 

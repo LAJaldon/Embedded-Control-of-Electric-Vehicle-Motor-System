@@ -292,11 +292,22 @@ GPIO_PinConfig gpioPinConfigs[] = {
     /* EK_TM4C1294XL_USR_SW2 */
     GPIOTiva_PJ_1 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
 
+    /* Configure Hall A */
+    GPIOTiva_PM_3 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
+    /* Configure Hall B */
+    GPIOTiva_PH_2 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
+    /* Configure Hall C */
+    GPIOTiva_PN_2 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
+
     /* Output pins */
     /* EK_TM4C1294XL_USR_D1 */
     GPIOTiva_PN_1 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_HIGH | GPIO_CFG_OUT_LOW,
     /* EK_TM4C1294XL_USR_D2 */
     GPIOTiva_PN_0 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_HIGH | GPIO_CFG_OUT_LOW,
+    /* EK_TM4C1294XL_USR_D3 */
+    GPIOTiva_PF_4 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_HIGH | GPIO_CFG_OUT_LOW,
+    /* EK_TM4C1294XL_USR_D4 */
+    GPIOTiva_PF_0 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_HIGH | GPIO_CFG_OUT_LOW,
 };
 
 /*
@@ -344,16 +355,22 @@ void EK_TM4C1294XL_initGPIO(void)
 I2CTiva_Object i2cTivaObjects[EK_TM4C1294XL_I2CCOUNT];
 
 const I2CTiva_HWAttrs i2cTivaHWAttrs[EK_TM4C1294XL_I2CCOUNT] = {
-    {
-        .baseAddr = I2C7_BASE,
-        .intNum = INT_I2C7,
+//    {
+//        .baseAddr = I2C7_BASE,
+//        .intNum = INT_I2C7,
+//        .intPriority = (~0)
+//    },
+//    {
+//        .baseAddr = I2C8_BASE,
+//        .intNum = INT_I2C8,
+//        .intPriority = (~0)
+//    }
+      {
+        .baseAddr = I2C2_BASE,
+        .intNum = INT_I2C2,
         .intPriority = (~0)
-    },
-    {
-        .baseAddr = I2C8_BASE,
-        .intNum = INT_I2C8,
-        .intPriority = (~0)
-    }
+      }
+
 };
 
 const I2C_Config I2C_config[] = {
@@ -393,13 +410,13 @@ void EK_TM4C1294XL_initI2C(void)
 
     /* I2C8 Init */
     /* Enable the peripheral */
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C8);
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C2);
 
     /* Configure the appropriate pins to be I2C instead of GPIO. */
-    GPIOPinConfigure(GPIO_PA2_I2C8SCL);
-    GPIOPinConfigure(GPIO_PA3_I2C8SDA);
-    GPIOPinTypeI2CSCL(GPIO_PORTA_BASE, GPIO_PIN_2);
-    GPIOPinTypeI2C(GPIO_PORTA_BASE, GPIO_PIN_3);
+    GPIOPinConfigure(GPIO_PN5_I2C2SCL);
+    GPIOPinConfigure(GPIO_PN4_I2C2SDA);
+    GPIOPinTypeI2CSCL(GPIO_PORTN_BASE, GPIO_PIN_5);
+    GPIOPinTypeI2C(GPIO_PORTN_BASE, GPIO_PIN_4);
 
     I2C_init();
 }
@@ -426,14 +443,14 @@ const PWMTiva_HWAttrs pwmTivaHWAttrs[EK_TM4C1294XL_PWMCOUNT] = {
     }
 };
 
-const PWM_Config PWM_config[] = {
-    {
-        .fxnTablePtr = &PWMTiva_fxnTable,
-        .object = &pwmTivaObjects[0],
-        .hwAttrs = &pwmTivaHWAttrs[0]
-    },
-    {NULL, NULL, NULL}
-};
+//const PWM_Config PWM_config[] = {
+//    {
+//        .fxnTablePtr = &PWMTiva_fxnTable,
+//        .object = &pwmTivaObjects[0],
+//        .hwAttrs = &pwmTivaHWAttrs[0]
+//    },
+//    {NULL, NULL, NULL}
+//};
 
 /*
  *  ======== EK_TM4C1294XL_initPWM ========

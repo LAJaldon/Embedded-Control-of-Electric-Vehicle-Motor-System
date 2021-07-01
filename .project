@@ -29,12 +29,7 @@
 		<link>
 			<name>drivers/Kentec320x240x16_ssd2119_spi.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c1294xl-boostxl-kentec-s1/drivers/Kentec320x240x16_ssd2119_spi.c</locationURI>
-		</link>
-		<link>
-			<name>drivers/touch.c</name>
-			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c1294xl-boostxl-kentec-s1/drivers/touch.c</locationURI>
+			<locationURI>PARENT-9-PROJECT_LOC/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c1294xl-boostxl-kentec-s1/drivers/Kentec320x240x16_ssd2119_spi.c</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>

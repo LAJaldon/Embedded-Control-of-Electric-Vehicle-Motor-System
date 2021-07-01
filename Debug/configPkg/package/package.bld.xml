@@ -7,7 +7,7 @@
         <srcFile name="package/cfg/empty_min_pem4f.c"/>
     </sources>
     <configscripts>
-        <srcFile name="C:/Users/lajal/OneDrive/Documents/EGH456/Assignment/empty_min.cfg"/>
+        <srcFile name="C:/Users/dtth1/Documents/MEGA/Uni/2021/EGH456 -   Embedded Systems/workspace/Assignment/empty_min.cfg"/>
     </configscripts>
     <makefiles>
         <srcFile name="package.mak" src="package.bld"/>
@@ -44,7 +44,7 @@
         isPartial="false"
         xCfgScript="package/cfg/empty_min_pem4f.cfg"
         xCfgPrefix="package/cfg/empty_min_pem4f"
-        cfgScript="C:/Users/lajal/OneDrive/Documents/EGH456/Assignment/empty_min.cfg"
+        cfgScript="C:/Users/dtth1/Documents/MEGA/Uni/2021/EGH456 -   Embedded Systems/workspace/Assignment/empty_min.cfg"
         cfgArgs="null"
         />
     </configurations>
@@ -56,7 +56,7 @@
         profile="release"
         xCfgScript="package/cfg/empty_min_pem4f.cfg"
         xCfgPrefix="package/cfg/empty_min_pem4f"
-        cfgScript="C:/Users/lajal/OneDrive/Documents/EGH456/Assignment/empty_min.cfg"
+        cfgScript="C:/Users/dtth1/Documents/MEGA/Uni/2021/EGH456 -   Embedded Systems/workspace/Assignment/empty_min.cfg"
         cfgArgs="null"
         />
     </executables>

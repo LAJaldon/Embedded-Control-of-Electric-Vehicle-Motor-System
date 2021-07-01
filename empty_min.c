@@ -35,73 +35,107 @@
  */
 /* XDCtools Header files */
 #include <xdc/std.h>
+#include <xdc/runtime/System.h>
+
+/* Standard Files */
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include "inc/hw_ints.h"
+#include "inc/hw_memmap.h"
+#include "inc/hw_types.h"
+#include "driverlib/gpio.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/systick.h"
+#include "driverlib/debug.h"
+#include "driverlib/fpu.h"
+#include "driverlib/gpio.h"
+#include "driverlib/interrupt.h"
+#include "driverlib/pin_map.h"
+#include "driverlib/rom.h"
+#include "driverlib/rom_map.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/timer.h"
 
 /* BIOS Header files */
 #include <ti/sysbios/BIOS.h>
 #include <ti/sysbios/knl/Task.h>
+//#include <ti/sysbios/hal/Swi.h>
+#include <ti/sysbios/hal/Hwi.h>
+#include <ti/sysbios/gates/GateHwi.h>
+#include <ti/sysbios/knl/Clock.h>
 
 /* TI-RTOS Header files */
-// #include <ti/drivers/EMAC.h>
 #include <ti/drivers/GPIO.h>
-// #include <ti/drivers/I2C.h>
-// #include <ti/drivers/SDSPI.h>
-// #include <ti/drivers/SPI.h>
-// #include <ti/drivers/UART.h>
-// #include <ti/drivers/USBMSCHFatFs.h>
-// #include <ti/drivers/Watchdog.h>
-// #include <ti/drivers/WiFi.h>
+#include <ti/drivers/I2C.h>
 
-#include "drivers/motorlib.h"
 /* Board Header file */
 #include "Board.h"
 
-#define TASKSTACKSIZE   512
+#include "motor/motor.h"
+#include "sensor/sensor.h"
+#include "UI/UI.h"
 
-Task_Struct task0Struct;
-Char task0Stack[TASKSTACKSIZE];
+/* Other Includes */
+#include "driverlib/timer.h"
+#include "driverlib/interrupt.h"
+#include "driverlib/sysctl.h"
+#include "inc/hw_memmap.h"
 
-/*
- *  ======== heartBeatFxn ========
- *  Toggle the Board_LED0. The Task_sleep is determined by arg0 which
- *  is configured for the heartBeat Task instance.
- */
-Void heartBeatFxn(UArg arg0, UArg arg1)
-{
-    while (1) {
-        Task_sleep((unsigned int)arg0);
-        GPIO_toggle(Board_LED0);
-    }
-}
+#define TASKSTACKSIZE   1024
+
+Task_Struct task1Struct, task2Struct;
+Task_Params taskParams;
+Char taskUIStack[TASKSTACKSIZE];
+Char taskLightStack[TASKSTACKSIZE];
+
+// Handles for Hwis
+
+//Error_Block eb;
+//Error_init(&eb);
+
+
 
 /*
  *  ======== main ========
  */
 int main(void)
 {
+    FPUEnable();
+    FPULazyStackingEnable();
     Task_Params taskParams;
+    Task_Params_init(&taskParams);
+
+    // Set system clock
+    uint32_t ui32SysClock = MAP_SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
+            SYSCTL_OSC_MAIN | SYSCTL_USE_PLL |
+            SYSCTL_CFG_VCO_480), 120000000);
 
     /* Call board init functions */
     Board_initGeneral();
-    // Board_initEMAC();
     Board_initGPIO();
-    // Board_initI2C();
-    // Board_initSDSPI();
-    // Board_initSPI();
-    // Board_initUART();
-    // Board_initUSB(Board_USBDEVICE);
-    // Board_initUSBMSCHFatFs();
-    // Board_initWatchdog();
-    // Board_initWiFi();
+    Board_initI2C();
 
-    /* Construct heartBeat Task  thread */
-    Task_Params_init(&taskParams);
-    taskParams.arg0 = 1000;
+    initUI();
+    initMotor();
+
+    /* Construct Task for UI */
     taskParams.stackSize = TASKSTACKSIZE;
-    taskParams.stack = &task0Stack;
-    Task_construct(&task0Struct, (Task_FuncPtr)heartBeatFxn, &taskParams, NULL);
+    taskParams.stack = &taskUIStack;
+    taskParams.priority = 10;
+    taskParams.arg0 = ui32SysClock;
+    Task_construct(&task1Struct, (Task_FuncPtr)drawFxn, &taskParams, NULL);
 
-    /* Turn on user LED  */
-    GPIO_write(Board_LED0, Board_LED_ON);
+    /* Construct Task for Light Sensor */
+    taskParams.stackSize = TASKSTACKSIZE;
+    taskParams.stack = &taskLightStack;
+    taskParams.priority = 11;
+    Task_construct(&task2Struct, (Task_FuncPtr)initI2C_opt3001, &taskParams, NULL);
+
+    // Enable interrupts
+    IntMasterEnable();
+
+    System_flush();
 
     /* Start BIOS */
     BIOS_start();
